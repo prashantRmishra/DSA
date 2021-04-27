@@ -1,7 +1,7 @@
 //left end
 import java.io.*;
 import java.util.*;
-public class One{
+public class Five{
     
     public static void main(String a[]) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -36,6 +36,7 @@ public class One{
         }
     }
 }
+
 
 /*Right end
 class Compute {

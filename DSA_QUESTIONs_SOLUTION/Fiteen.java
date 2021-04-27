@@ -42,4 +42,4 @@ gfg
 output:
 acb
 ggf
-TC: NlogN for sorting + O(n*m) where n is length of array and m is the max depth of recursion/
+TC: NlogN for sorting + O(n*m) where n is length of array and m is the max depth of recursion*/
