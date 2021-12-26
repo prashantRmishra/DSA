@@ -1,4 +1,4 @@
-# Few methods to keep in minds while solving DAS question
+# Few methods to keep in minds while solving DSA question
 
 Sorting 2D array (int) 
 ---
