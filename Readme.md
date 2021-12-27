@@ -10,3 +10,15 @@ Scenario : {
 ```java
 Arrays.sort(arr, Comparator.comparingInt(e->e[0]*e[1] + e[1]*e[1]));
 ```
+
+Converting int to binary and binary to int
+---
+int to binary
+```java
+String binaryString = Integer.toBinaryString(intValue);
+```
+binary to int
+```java
+int intValue = Integer.parseInt(binaryString,2); // where 2 is the base of the binaryStirng that would be converted into int value of base 10;
+```
+
