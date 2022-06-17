@@ -1,0 +1,45 @@
+merge(a,0,a.length-1);
+void merge(int[] a , int l, int r){
+	if(l<r){
+		int mid =l + (r-l)/2;
+		merge(a,l,mid);
+		merge(a,mid+1,r);
+		mergeSort(a,l,m,r);
+	}
+}
+void mergeSort(int a[],int l,int m, int r){
+	int n = m-l+1;
+	int m = r-m;
+	int p[] = new int[n];
+	int q[] = new int[q];
+	
+	for(int i = 0;i<n;i++){
+		p[i] = a[i+l];
+	}
+	for(int i = 0;i<m;i++){
+		q[i] = a[i+m+1];
+	}
+	int i = 0,j = 0,k =l;
+	while(i<n && j<m){
+		if(p[i]<=p[j]){
+			a[k] = p[i];
+			i++;
+		}
+		else{
+			a[k] = q[j];
+			j++;
+		}
+		k++;
+		
+	}
+
+// if elements are remaining in the p array
+	while(i<n) {
+		a[k] = p[i];
+		i++;k++;
+	}
+	while(j<m) {
+		a[k] = q[j];
+		j++;k++;
+	}
+}
