@@ -140,3 +140,71 @@ List<List<Integer>> list  = new ArrayList<>();
     }
 
 ```
+#### find all subsets of an array (that may have duplicate value ) avoid any duplicate subsets
+
+Now, This problem is stright as that of finding all the possible subsets of the array
+for this we could have used same powerset or recursion solutions, but that will require additional 
+time complexity of klogk as we will have to avoid the duplicate subsets 
+
+Hence we will have to device an optimal solution in the recursion itself instead of having additional time complexity of klogk.
+
+``
+Input: nums = [1,2,2]
+Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+``
+```java
+
+// approach one : using recursion : though this solutions works but,
+ // if we think of tc its o(2^n)k.logk // as o(2^n) for recursion , k : if we assume average length of each subset is k , then k subsets are put in another List i.e. 'list', hence klogk for sorting list of size k 
+// moral of the story is we will have to optimize this solution to get a better tc
+/*
+class Solution {
+    List<List<Integer>> list = new ArrayList<>();
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        // for getting all the possible subsets we can use recursion the 
+        // way we used for subset I 
+        // but we will have to avoid having duplicates 
+        findSubsets(0,nums,new ArrayList<>());
+        return list;
+        
+    }
+    public void findSubsets(int i, int[] nums, List<Integer> l){
+        if(i>=nums.length) {
+            List<Integer> temp = new ArrayList<>(l);
+            Collections.sort(temp);
+            if(!list.contains(temp))
+                list.add(temp);
+            return;
+        }
+        l.add(nums[i]);
+        findSubsets(i+1,nums,l);
+        l.remove(l.size()-1);
+        findSubsets(i+1,nums,l);
+    }
+}
+**/
+
+// solution 2 
+// optimal sol :tc o(2^n)*k
+// for reference https://www.youtube.com/watch?v=RIn3gOkbhQE&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=11
+class Solution {
+    List<List<Integer>> list = new ArrayList<>();
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        findSubsets(0,nums,new ArrayList<>());
+        return list;
+        
+    }
+    public void findSubsets(int i, int[] nums, List<Integer> l){
+        List<Integer> temp = new ArrayList<>(l);
+        list.add(temp);
+        for(int p = i;p<nums.length;p++){
+            if(p>i && nums[p]==nums[p-1]) continue;
+            l.add(nums[p]);
+            findSubsets(p+1,nums,l);
+            l.remove(l.size()-1);
+        }
+        
+    }
+}
+```
