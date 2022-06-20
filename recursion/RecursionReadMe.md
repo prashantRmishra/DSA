@@ -208,3 +208,99 @@ class Solution {
     }
 }
 ```
+
+## Get All Permutations of an array if all the elements of the array are unique
+
+
+```java
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        getAllPermutations(0,nums,list);
+        return list;
+    }
+    public void getAllPermutations(int ind, int[] nums,List<List<Integer>> list){
+        if(ind==nums.length) {
+            List<Integer> temp = new ArrayList<>(Arrays.stream(nums).boxed().toList());
+           // Collections.sort(temp);
+                list.add(temp);
+            return;
+        }
+        for(int i =ind;i<nums.length;i++){
+          
+            swap(nums,i,ind);
+            getAllPermutations(ind+1,nums,list);
+            swap(nums,i,ind);
+        }
+    }
+    public void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
+```
+``Another way ``
+```java
+public class GetPermutations{
+  // second approach ,this gives the right solution
+    int count = 0;
+    List<List<Integer>> l = new ArrayList<>();
+    public List<List<Integer>> getPermutation(int[] arr){
+        boolean check[] = new boolean[arr.length];
+    
+        if(getAllPermutations(arr,new ArrayList<>(), check, k)
+      
+        return l;
+    }
+    
+    public void getAllPermutations(int[] arr, List<Integer> list, boolean[] check){
+        if(list.size()==arr.length){
+               list.add( new ArrayList<>(list)); 
+            }
+        
+        for(int i =0;i<arr.length;i++){
+            if(!check[i]){
+                check[i] = true;
+                list.add(arr[i]);
+                getAllPermutations(arr,list,check);
+                list.remove(list.size()-1);
+                check[i] = false;
+            }
+        }
+    }
+}
+```
+
+## Get all permutations of the array if it contains duplicate values as well so return all unique permutations
+
+```java
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> list = new ArrayList<>();
+        getAllPermutations(0,nums,list);
+        return list;
+    }
+    public void getAllPermutations(int ind, int[] nums,List<List<Integer>> list){
+        if(ind==nums.length) {
+            List<Integer> temp = new ArrayList<>(Arrays.stream(nums).boxed().toList());
+           // Collections.sort(temp);
+            if(!list.contains(temp))
+                list.add(temp);
+            return;
+        }
+        for(int i =ind;i<nums.length;i++){
+          
+            swap(nums,i,ind);
+            getAllPermutations(ind+1,nums,list);
+            swap(nums,i,ind);
+        }
+    }
+    public void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
+```
