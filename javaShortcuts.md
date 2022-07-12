@@ -23,9 +23,94 @@ using HashMap
 -
 `for(int code:barcodes) map.put(code,map.getOrDefault(code,0)+1);`
 
+Sorting HashMap using Colletion.sort();
+
+```java
+
+List<Map.Entry<Integer,String>> list = new ArrayList<>(map.entrySet());
+Collections.sort(list, new Comparator<Map.Entry<Integer,String>>()
+{
+	public int compare(Map.Entry<Integer,String> a, 
+	Map.Entry<Integer,String> b){
+		return a.getKey() - b.getKey();
+			}
+		}
+  );
+Map<Integer,String> newMap = new LinkedHashMap<>(); // this is store the elements in inserted order
+for(Entry<Integer,String> e : list) newMap.put(e.getKey(),e.getValue());
+```
+
+Creating singleton class in java
+
+```java
+// this is called lazy initialization
+class SingletonExample {
+	public static SingletonExample singleton = null;
+	private SingletonExample(){
+	}
+	public static SingletonExample getInstance(){
+		if(singleton==null){
+			singleton = new SingletonExample();
+		}
+		return singleton;
+	}
+}
+
+//lazy initialization with thread safe singleton class in java
+class SingletonExample {
+	public static SingletonExample singleton = null;
+	private SingletonExample(){
+	}
+	public static SingletonExample getInstance(){
+		if(singleton==null){ 
+			synchronized(SingletonExample.class){
+				if(singleton == null){
+					singleton = new SingletonExample();
+				}
+			}
+		}
+		return singleton;
+	}
+}
+```
 
 
+Difference between `Comparable` and `Comparator`
 
+```java
+class Employee {
+	private String id;
+	private int age;
+	private int salary;
+	private String fullName;
+}
+
+List<Employees> list  = new ArrayList<>();
+// Comparable
+class Employee implements Comparable {
+	@Override // sort in ascending order based on age of the employee
+	public int compareTo(Employee e2){
+		return this.getAge() - e2.getAge();
+	}
+}
+Collection.sort(list); // we can sort list of Employee that are of Comparable Type.
+
+//Comparator
+//age comparator
+Collection.sort(list new Comparator<Employee>(){
+	public int compare(Employee a, Employee b){
+		return a.getAge() - b.getAge();
+	}
+});
+
+// salary comparator
+Collection.sort(list new Comparator<Employee>(){
+	public int compare(Employee a, Employee b){
+		return a.getSalary() - b.getSalary();
+	}
+});
+
+```
 
 
 
